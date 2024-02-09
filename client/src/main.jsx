@@ -1,3 +1,4 @@
+import { Sepolia } from "@thirdweb-dev/chains";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import React from "react";
 import { createRoot } from "react-dom/client";

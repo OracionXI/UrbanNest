@@ -9,8 +9,7 @@ import "./index.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(
-  <React.StrictMode>
+root.render( 
     <ThirdwebProvider
       clientId={import.meta.env.VITE_TEMPLATE_CLIENT_ID}
       activeChain={Sepolia}
@@ -18,6 +17,5 @@ root.render(
       <Router>
         <App />
       </Router>
-    </ThirdwebProvider>
-  </React.StrictMode>
+    </ThirdwebProvider> 
 );

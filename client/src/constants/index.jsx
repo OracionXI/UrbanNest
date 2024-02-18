@@ -22,12 +22,10 @@ export const navlinks = [
     name: "payment",
     imgUrl: payment,
     link: "/",
-    link: "/",
   },
   {
     name: "withdraw",
     imgUrl: withdraw,
-    link: "/",
     link: "/",
   },
   {

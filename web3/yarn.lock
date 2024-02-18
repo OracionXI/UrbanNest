@@ -595,11 +595,6 @@
     mcl-wasm "^0.7.1"
     rustbn.js "~0.2.0"
 
-"@nomicfoundation/solidity-analyzer-win32-x64-msvc@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/@nomicfoundation/solidity-analyzer-win32-x64-msvc/-/solidity-analyzer-win32-x64-msvc-0.1.1.tgz"
-  integrity sha512-HrVJr6+WjIXGnw3Q9u6KQcbZCtk0caVWhCdFADySvRyUxJ8PnzlaP+MhwNE8oyT8OZ6ejHBRrrgjSqDCFXGirw==
-
 "@nomicfoundation/solidity-analyzer@^0.1.0":
   version "0.1.1"
   resolved "https://registry.npmjs.org/@nomicfoundation/solidity-analyzer/-/solidity-analyzer-0.1.1.tgz"

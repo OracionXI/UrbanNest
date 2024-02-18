@@ -1,3 +1,4 @@
-export { default as Sidebar } from './Sidebar';
-export { default as Navbar } from './Navbar';
-export { default as CustomButton } from './CustomButton';
+export { CustomButton } from './CustomButton';
+export { Navbar } from './Navbar';
+export { Sidebar } from './Sidebar';
+

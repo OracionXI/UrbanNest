@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import { Navbar, Sidebar } from "./components";
 import { Home } from "./pages";
 
+import {CreateCampaign,CampaignDetails} from './pages';
+
+
 const App = () => {
   return (
     <div className="relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
@@ -14,6 +17,8 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/create-campaign" element={<CreateCampaign />} />
+          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
         </Routes>
       </div>
     </div>

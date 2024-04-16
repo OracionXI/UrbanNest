@@ -17,8 +17,8 @@ function Navbar() {
         </Link>
         <Link to="/">Home</Link>
         <Link to="/">About</Link>
+        <Link to="/list">List</Link>
         <Link to="/">Contact</Link>
-        <Link to="/">Agents</Link>
       </div>
       <div className="right">
         {currentUser ? (

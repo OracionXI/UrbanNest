@@ -64,7 +64,7 @@ function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="price">Price</label>
-              <input id="price" name="price" type="number" />
+              <input min={0} id="price" name="price" type="number" />
             </div>
             <div className="item">
               <label htmlFor="address">Address</label>
@@ -138,19 +138,43 @@ function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="size">Total Size (sqft)</label>
-              <input min={0} id="size" name="size" type="number" />
+              <input
+                min={0}
+                id="size"
+                name="size"
+                type="number"
+                placeholder="square feet"
+              />
             </div>
             <div className="item">
               <label htmlFor="school">School</label>
-              <input min={0} id="school" name="school" type="number" />
+              <input
+                min={0}
+                id="school"
+                name="school"
+                type="number"
+                placeholder="meter"
+              />
             </div>
             <div className="item">
               <label htmlFor="bus">bus</label>
-              <input min={0} id="bus" name="bus" type="number" />
+              <input
+                min={0}
+                id="bus"
+                name="bus"
+                type="number"
+                placeholder="meter"
+              />
             </div>
             <div className="item">
               <label htmlFor="restaurant">Restaurant</label>
-              <input min={0} id="restaurant" name="restaurant" type="number" />
+              <input
+                min={0}
+                id="restaurant"
+                name="restaurant"
+                type="number"
+                placeholder="meter"
+              />
             </div>
             <button className="sendButton">Add</button>
             {error && <span>Failed to create post!</span>}

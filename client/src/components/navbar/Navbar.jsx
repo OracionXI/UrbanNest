@@ -13,7 +13,7 @@ function Navbar() {
       <div className="left">
         <Link to="/" className="logo">
           <img src="/eth.png" alt="" />
-          <span>SvelteSpaces</span>
+          <span>UrbanNest</span>
         </Link>
         <Link to="/">Home</Link>
         <Link to="/">About</Link>

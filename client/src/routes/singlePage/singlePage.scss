@@ -93,7 +93,7 @@
           }
         }
         .bottom {
-          margin-top: 50px;
+          margin: 50px 0px;
           color: #555;
           line-height: 20px;
         }
@@ -194,6 +194,7 @@
       .buttons {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 50px;
 
         button {
           padding: 20px;

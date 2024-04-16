@@ -1,0 +1,17 @@
+// UploadWidget.scss
+
+.cloudinaryButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid teal;
+  background-color: transparent;
+  color: teal;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: teal;
+    color: white;
+  }
+}

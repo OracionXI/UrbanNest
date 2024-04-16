@@ -1,28 +1,67 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./routes/homePage/homePage";
+import { Layout, RequireAuth } from "./routes/layout/layout";
+import ListPage from "./routes/listPage/listPage";
+import Login from "./routes/login/login";
+import NewPostPage from "./routes/newPostPage/newPostPage";
+import ProfilePage from "./routes/profilePage/profilePage";
+import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
+import Register from "./routes/register/register";
+import SinglePage from "./routes/singlePage/singlePage";
 
-import { Navbar, Sidebar } from "./components";
-import { Home } from "./pages";
+function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/list",
+          element: <ListPage />,
+        },
+        {
+          path: "/:id",
+          element: <SinglePage />,
+        },
+        {
+          path: "/profile",
+          element: <ProfilePage />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <ProfilePage />,
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />,
+        },
+        {
+          path: "/add",
+          element: <NewPostPage />,
+        },
+      ],
+    },
+  ]);
 
-import {CreateCampaign,CampaignDetails} from './pages';
-
-
-const App = () => {
-  return (
-    <div className="relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
-      <div className="sm:flex hidden mr-10 relative">
-        <Sidebar />
-      </div>
-      <div className="flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create-campaign" element={<CreateCampaign />} />
-
-        </Routes>
-      </div>
-    </div>
-  );
-};
+  return <RouterProvider router={router} />;
+}
 
 export default App;

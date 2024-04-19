@@ -5,7 +5,6 @@ import "./homePage.scss";
 
 function HomePage() {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
   return (
     <div className="homePage">
       <div className="textContainer">
@@ -20,7 +19,7 @@ function HomePage() {
           <SearchBar />
           <div className="boxes">
             <div className="box">
-              <h1>16+</h1>
+              <h1>10+</h1>
               <h2>Years of Experience</h2>
             </div>
             <div className="box">

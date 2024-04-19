@@ -17,7 +17,6 @@ function SinglePage() {
     if (!currentUser) {
       navigate("/login");
     }
-    // AFTER REACT 19 UPDATE TO USEOPTIMISTIK HOOK
     setSaved((prev) => !prev);
     try {
       await apiRequest.post("/users/save", { postId: post.id });
@@ -40,7 +39,9 @@ function SinglePage() {
                   <img src="/pin.png" alt="" />
                   <span>{post.address}</span>
                 </div>
-                <div className="price">$ {post.price}</div>
+                <div className="price">
+                  <img src="/taka.png" alt="BDT" /> {post.price}
+                </div>
               </div>
               <div className="user">
                 <img src={post.user.avatar} alt="" />

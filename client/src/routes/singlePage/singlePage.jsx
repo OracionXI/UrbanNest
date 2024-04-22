@@ -13,13 +13,31 @@ function SinglePage() {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const handleMessage = async () => {
+    if (!currentUser) {
+      navigate("/login");
+    }
+    try {
+      const receiverId = post.user.id;
+      let chat = await apiRequest.get(`/chats/${receiverId}`);
+
+      if (!chat) {
+        const newChat = await apiRequest.post("/chats", { receiverId });
+        chat = await apiRequest.get(`/chats/${newChat.id}`);
+      }
+      navigate("/profilePage");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleSave = async () => {
     if (!currentUser) {
       navigate("/login");
     }
     setSaved((prev) => !prev);
     try {
-      await apiRequest.post("/users/save", { postId: post.id });
+      await apiRequest.post("/users/savedPosts", { postId: post.id });
     } catch (err) {
       console.log(err);
       setSaved((prev) => !prev);

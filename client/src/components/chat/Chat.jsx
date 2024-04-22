@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { format } from "timeago.js";
 import { AuthContext } from "../../context/AuthContext";
-import { SocketContext } from "../../context/SocketContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNotificationStore } from "../../lib/notificationStore";
 import "./chat.scss";
@@ -9,11 +8,14 @@ import "./chat.scss";
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
   const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
 
   const messageEndRef = useRef();
 
   const decrease = useNotificationStore((state) => state.decrease);
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
 
   const handleOpenChat = async (id, receiver) => {
     try {
@@ -38,18 +40,10 @@ function Chat({ chats }) {
       const res = await apiRequest.post("/messages/" + chat.id, { text });
       setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
       e.target.reset();
-      socket.emit("sendMessage", {
-        receiverId: chat.receiver.id,
-        data: res.data,
-      });
     } catch (err) {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat]);
 
   useEffect(() => {
     const read = async () => {
@@ -59,19 +53,7 @@ function Chat({ chats }) {
         console.log(err);
       }
     };
-
-    if (chat && socket) {
-      socket.on("getMessage", (data) => {
-        if (chat.id === data.chatId) {
-          setChat((prev) => ({ ...prev, messages: [...prev.messages, data] }));
-          read();
-        }
-      });
-    }
-    return () => {
-      socket.off("getMessage");
-    };
-  }, [socket, chat]);
+  }, [chat]);
 
   return (
     <div className="chat">

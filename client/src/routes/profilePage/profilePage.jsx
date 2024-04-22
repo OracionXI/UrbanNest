@@ -8,7 +8,9 @@ import "./profilePage.scss";
 
 function ProfilePage() {
   const data = useLoaderData();
+
   const { updateUser, currentUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -62,10 +64,12 @@ function ProfilePage() {
           </div>
           <Suspense fallback={<p>Loading...</p>}>
             <Await
-              resolve={data.postResponse}
+              resolve={data.savedResponse}
               errorElement={<p>Error loading posts!</p>}
             >
-              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
+              {(savedResponse) => (
+                <List posts={savedResponse.data.savedPosts} />
+              )}
             </Await>
           </Suspense>
         </div>

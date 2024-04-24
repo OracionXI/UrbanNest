@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { useNotificationStore } from "../../lib/notificationStore";
 import "./navbar.scss";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-
   const { currentUser } = useContext(AuthContext);
+  const fetch = useNotificationStore((state) => state.fetch);
+  const number = useNotificationStore((state) => state.number);
+
+  if (currentUser) fetch();
 
   return (
     <nav>
@@ -18,7 +22,7 @@ function Navbar() {
         <Link to="/">Home</Link>
         <Link to="/">About</Link>
         <Link to="/list">List</Link>
-        <Link to="/">Contact</Link>
+        <Link to="/contact">Contact</Link>
       </div>
       <div className="right">
         {currentUser ? (
@@ -26,7 +30,7 @@ function Navbar() {
             <img src={currentUser.avatar || "noavatar.jpg"} alt="" />
             <span>{currentUser.username}</span>
             <Link to="/profile" className="profile">
-              <div className="notification">3</div>
+              {number > 0 && <div className="notification">{number}</div>}
               <span>Profile</span>
             </Link>
           </div>
@@ -48,10 +52,18 @@ function Navbar() {
         <div className={open ? "menu active" : "menu"}>
           <Link to="/">Home</Link>
           <Link to="/">About</Link>
+          <Link to="/list">List</Link>
           <Link to="/">Contact</Link>
-          <Link to="/">Agents</Link>
-          <Link to="/">Sign in</Link>
-          <Link to="/">Sign up</Link>
+          {currentUser ? (
+            <Link to="/profile">Profile</Link>
+          ) : (
+            <>
+              <Link to="/login">Sign in</Link>
+              <Link to="/register" className="register">
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

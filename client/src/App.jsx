@@ -4,6 +4,7 @@ import {
   profilePageLoader,
   singlePageLoader,
 } from "./lib/loaders";
+import ContactPage from "./routes/contact/contact";
 import HomePage from "./routes/homePage/homePage";
 import { Layout, RequireAuth } from "./routes/layout/layout";
 import ListPage from "./routes/listPage/listPage";
@@ -28,6 +29,10 @@ function App() {
           path: "/list",
           element: <ListPage />,
           loader: listPageLoader,
+        },
+        {
+          path: "/contact",
+          element: <ContactPage />,
         },
         {
           path: "/:id",

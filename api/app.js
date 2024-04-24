@@ -21,6 +21,8 @@ app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
+export default app;
+
 app.listen(8800, () => {
   console.log("Server is on port 8800!");
 });

@@ -4,6 +4,8 @@ import {
   profilePageLoader,
   singlePageLoader,
 } from "./lib/loaders";
+import Admin from "./routes/admin/admin";
+import ContactPage from "./routes/contact/contact";
 import HomePage from "./routes/homePage/homePage";
 import { Layout, RequireAuth } from "./routes/layout/layout";
 import ListPage from "./routes/listPage/listPage";
@@ -52,6 +54,10 @@ function App() {
           path: "/profile",
           element: <ProfilePage />,
           loader: profilePageLoader,
+        },
+        {
+          path: "/admin",
+          element: <Admin />,
         },
         {
           path: "/profile/update",

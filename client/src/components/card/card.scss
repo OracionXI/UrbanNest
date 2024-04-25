@@ -3,11 +3,10 @@
 .card {
   display: flex;
   gap: 20px;
+  height: 200px;
 
   .imageContainer {
     flex: 2;
-    height: 200px;
-
     @include md {
       display: none;
     }
@@ -25,6 +24,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
+    padding: 15px 0px;
 
     img {
       width: 16px;
@@ -57,6 +57,7 @@
       padding: 5px;
       border-radius: 5px;
       background-color: rgba(254, 205, 81, 0.438);
+      color: #000;
       width: max-content;
 
       img {

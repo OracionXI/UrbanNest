@@ -1,7 +1,27 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import apiRequest from "../../lib/apiRequest";
 import "./card.scss";
 
-function Card({ item }) {
+function Card({ item, onDelete }) {
+  const { currentUser } = useContext(AuthContext);
+
+  const handlePostDelete = async (id) => {
+    try {
+      const response = await apiRequest.delete(`/posts/${id}`);
+      if (response.status === 200) {
+        console.log("successfully deleted post");
+        onDelete(id);
+        window.location.reload();
+      } else {
+        console.error("Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Failed to delete post", error);
+    }
+  };
+
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
@@ -36,6 +56,12 @@ function Card({ item }) {
             <div className="icon">
               <img src="/chat.png" alt="" />
             </div>
+            {(currentUser.email === "admin@gmail.com" ||
+              currentUser.id === item.userId) && (
+              <div className="icon" onClick={() => handlePostDelete(item.id)}>
+                <img src="/trash.png" alt="" />
+              </div>
+            )}
           </div>
         </div>
       </div>

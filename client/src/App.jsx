@@ -32,6 +32,10 @@ function App() {
           loader: listPageLoader,
         },
         {
+          path: "/contact",
+          element: <ContactPage />,
+        },
+        {
           path: "/:id",
           element: <SinglePage />,
           loader: singlePageLoader,

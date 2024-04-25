@@ -1,0 +1,63 @@
+.contactPage {
+  height: 100%;
+  display: flex;
+
+  .formContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .form {
+      padding: 60px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background-color: #fcf5f3;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .formGroup {
+      width: 100%;
+      margin-bottom: 20px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        resize: vertical;
+      }
+
+      .error {
+        color: rgba(255, 0, 0, 0.591);
+        margin-top: 5px;
+      }
+    }
+
+    .submitBtn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 2px solid teal;
+      background-color: transparent;
+      color: teal;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: teal;
+        color: white;
+      }
+    }
+  }
+}

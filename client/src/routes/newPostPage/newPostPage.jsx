@@ -64,7 +64,7 @@ function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="price">Price</label>
-              <input min={0} id="price" name="price" type="number" />
+              <input id="price" name="price" type="number" />
             </div>
             <div className="item">
               <label htmlFor="address">Address</label>
@@ -112,6 +112,7 @@ function NewPostPage() {
                 <option value="land">Land</option>
               </select>
             </div>
+
             <div className="item">
               <label htmlFor="utilities">Utilities Policy</label>
               <select name="utilities">

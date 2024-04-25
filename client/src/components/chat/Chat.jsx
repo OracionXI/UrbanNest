@@ -77,31 +77,56 @@ function Chat({ chats }) {
     <div className="chat">
       <div className="messages">
         <h1>Messages</h1>
-        {chats?.map((c) => (
-          <div
-            className="message"
-            key={c.id}
-            style={{
-              backgroundColor:
-                c.seenBy.includes(currentUser.id) || chat?.id === c.id
-                  ? "white"
-                  : "#fecd514e",
-            }}
-            onClick={() => handleOpenChat(c.id, c.receiver)}
-          >
-            <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
-            <span>{c.receiver.username}</span>
-            <p>{c.lastMessage}</p>
-          </div>
-        ))}
+        {chats?.map((c) =>
+          c.receiver !== null ? (
+            <div
+              className="message"
+              key={c.id}
+              style={{
+                backgroundColor:
+                  c.seenBy.includes(currentUser.id) || chat?.id === c.id
+                    ? "white"
+                    : "#fecd514e",
+              }}
+              onClick={() => handleOpenChat(c.id, c.receiver)}
+            >
+              <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
+              <span>{c.receiver.username}</span>
+              <p>{c.lastMessage}</p>
+            </div>
+          ) : (
+            <div
+              className="message"
+              key={c.id}
+              style={{
+                backgroundColor:
+                  c.seenBy.includes(currentUser.id) || chat?.id === c.id
+                    ? "white"
+                    : "#fecd514e",
+              }}
+              onClick={() => handleOpenChat(c.id, null)}
+            >
+              <img src={"/noavatar.jpg"} alt="" />
+              <span>{"Deleted User"}</span>
+              <p>{c.lastMessage}</p>
+            </div>
+          )
+        )}
       </div>
       {chat && (
         <div className="chatBox">
           <div className="top">
-            <div className="user">
-              <img src={chat.receiver.avatar || "noavatar.jpg"} alt="" />
-              {chat.receiver.username}
-            </div>
+            {chat.receiver ? (
+              <div className="user">
+                <img src={chat.receiver.avatar || "/noavatar.jpg"} alt="" />
+                {chat.receiver.username}
+              </div>
+            ) : (
+              <div className="user">
+                <img src="/noavatar.jpg" alt="" />
+                Deleted User
+              </div>
+            )}
             <span className="close" onClick={() => setChat(null)}>
               X
             </span>

@@ -27,7 +27,11 @@ io.on("connection", (socket) => {
   });
   socket.on("sendMessage", ({ receiverId, data }) => {
     const receiver = getUser(receiverId);
-    io.to(receiver.socketId).emit("getMessage", data);
+    (receiver !== null) ? (
+      io.to(receiver.socketId).emit("getMessage", data)
+    ) : (
+      console.log("User nai....")
+    )
   });
   socket.on("disconnect", () => {
     removeUser(socket.id);

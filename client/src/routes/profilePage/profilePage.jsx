@@ -43,7 +43,13 @@ function ProfilePage() {
             <span>
               E-mail: <b>{currentUser.email}</b>
             </span>
+            <br />
             <button onClick={handleLogout}>Logout</button>
+            {currentUser.email === "admin@gmail.com" && (
+              <button>
+                <Link to="/admin">Admin</Link>
+              </button>
+            )}
           </div>
           <div className="title">
             <h1>My List</h1>

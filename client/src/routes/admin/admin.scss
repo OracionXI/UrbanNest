@@ -1,0 +1,32 @@
+@import "../../responsive.scss";
+
+.userPage {
+  display: flex;
+  height: 100%;
+
+  .userContainer {
+    flex: 3;
+    height: 100%;
+
+    .wrap {
+      height: 100%;
+      padding-right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      overflow-y: scroll;
+      padding-bottom: 130px;
+      padding-top: 20px;
+    }
+  }
+
+  .Container {
+    flex: 2;
+    height: 100%;
+    background-color: #fcf5f3;
+
+    @include md {
+      display: none;
+    }
+  }
+}

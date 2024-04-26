@@ -24,9 +24,60 @@
     flex: 2;
     height: 100%;
     background-color: #fcf5f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     @include md {
       display: none;
+    }
+
+    .img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .formContainer {
+      align-items: center;
+      justify-content: center;
+      form {
+        flex-direction: column;
+        gap: 20px;
+
+        .item {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          input {
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            margin-bottom: 10px;
+          }
+        }
+        button {
+          padding: 15px;
+          border-radius: 5px;
+          border: 2px solid teal;
+          background-color: transparent;
+          color: teal;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: teal;
+            color: white;
+          }
+        }
+        span {
+          color: rgba(255, 0, 0, 0.591);
+        }
+      }
     }
   }
 }

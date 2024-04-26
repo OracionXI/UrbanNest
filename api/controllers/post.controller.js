@@ -43,22 +43,22 @@ export const getPost = async (req, res) => {
 
     const token = req.cookies?.token;
 
+    let isSaved = false;
+
     if (token) {
-      jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
-        if (!err) {
-          const saved = await prisma.savedPost.findUnique({
-            where: {
-              userId_postId: {
-                postId: id,
-                userId: payload.id,
-              },
-            },
-          });
-          res.status(200).json({ ...post, isSaved: saved ? true : false });
-        }
+      const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      const saved = await prisma.savedPost.findUnique({
+        where: {
+          userId_postId: {
+            postId: id,
+            userId: payload.id,
+          },
+        },
       });
+      isSaved = !!saved;
     }
-    res.status(200).json({ ...post, isSaved: false });
+
+    res.status(200).json({ ...post, isSaved }); 
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get post" });

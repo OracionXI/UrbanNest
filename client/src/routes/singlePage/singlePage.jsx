@@ -1,5 +1,5 @@
 import DOMPurify from "dompurify";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
@@ -10,12 +10,61 @@ import "./singlePage.scss";
 function SinglePage() {
   const post = useLoaderData();
   const [saved, setSaved] = useState(post.isSaved);
+  const [chatId, setChatId] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleMessage = async () => {
-    if (!currentUser) {
-      navigate("/profile");
+  const handlePostDelete = async (id) => {
+    try {
+      const response = await apiRequest.delete(`/posts/${id}`);
+      if (response.status === 200) {
+        console.log("successfully deleted post");
+        navigate("/list");
+      } else {
+        console.error("Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Failed to delete post", error);
+    }
+  };
+
+  useEffect(() => {
+    const handleMessage = async () => {
+      if (currentUser && chatId) {
+        const text = `I want to ${post.type} ${post.title}.`;
+        const url = `/messages/${chatId}`;
+        try {
+          const response = await apiRequest.post(url, { text });
+          console.log("Message sent:", response.data);
+          navigate("/profile");
+        } catch (error) {
+          console.error("Failed to send message:", error);
+        }
+      }
+    };
+    handleMessage();
+  }, [currentUser, chatId, navigate, post.title, post.type]);
+
+  const getChatId = async (current, creator) => {
+    try {
+      const res = await apiRequest.get("/chats");
+      const matchingChat = res.data.find((chat) => {
+        const hasCurrent = chat.userIDs.includes(current);
+        const hasCreator = chat.userIDs.includes(creator);
+        if (hasCurrent && hasCreator) {
+          setChatId(chat.id);
+          return true;
+        }
+      });
+
+      if (!matchingChat) {
+        const newChatResponse = await apiRequest.post("/chats", {
+          receiverId: creator,
+        });
+        setChatId(newChatResponse.data.id);
+      }
+    } catch (error) {
+      console.error("Error fetching chats:", error);
     }
   };
 
@@ -147,7 +196,7 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
-            <button onClick={handleMessage}>
+            <button onClick={() => getChatId(currentUser.id, post.userId)}>
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
@@ -160,6 +209,13 @@ function SinglePage() {
               <img src="/save.png" alt="" />
               {saved ? "Place Saved" : "Save the Place"}
             </button>
+            {(currentUser.email === "admin@gmail.com" ||
+              currentUser.id === post.userId) && (
+              <button onClick={() => handlePostDelete(post.id)}>
+                <img src="/trash.png" alt="" />
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>

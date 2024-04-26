@@ -13,6 +13,10 @@ function ProfilePage() {
 
   const navigate = useNavigate();
 
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
+
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
@@ -46,9 +50,7 @@ function ProfilePage() {
             <br />
             <button onClick={handleLogout}>Logout</button>
             {currentUser.email === "admin@gmail.com" && (
-              <button>
-                <Link to="/admin">Admin</Link>
-              </button>
+              <button onClick={handleAdmin}>Admin</button>
             )}
           </div>
           <div className="title">

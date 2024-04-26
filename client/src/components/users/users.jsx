@@ -1,7 +1,7 @@
 import apiRequest from "../../lib/apiRequest";
 import "./users.scss";
 
-function Users({ user }) {
+function Users({ user, onUserTitleClick }) {
   const dateObj = new Date(user.createdAt);
   const formattedDate = dateObj.toLocaleString();
 
@@ -16,7 +16,7 @@ function Users({ user }) {
   };
 
   return (
-    <div className="carded">
+    <div className="carded" onClick={() => onUserTitleClick(user)}>
       <div className="imageContainer">
         <img className="img" src={user.avatar || "noavatar.jpg"} alt="" />
       </div>
